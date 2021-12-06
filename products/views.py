@@ -21,7 +21,7 @@ def all_categories(request):
 def category_products(request, slug):
     category = get_object_or_404(Category, slug=slug)
     products = Product.objects.filter(is_active=True, category=category)
-    categories = Category.objects.filter(is_active=True)
+    categories = Category.objects.all()
     context = {
         'category': category,
         'products': products,
@@ -30,12 +30,11 @@ def category_products(request, slug):
     return render(request, 'store/category_products.html', context)
 
 
-def detail(request, slug):
-    product = get_object_or_404(Product, slug=slug)
-    related_products = Product.objects.exclude(id=product.id).filter(is_active=True, category=product.category)
+def detail(request, c_slug, p_slug):
+    product = get_object_or_404(Product, slug=p_slug)
+    related_products = Product.objects.exclude(id=product.id).filter(is_active=True, category__slug=c_slug)
     context = {
         'product': product,
         'related_products': related_products,
-
     }
     return render(request, 'store/detail.html', context)

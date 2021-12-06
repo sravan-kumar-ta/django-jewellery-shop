@@ -62,7 +62,7 @@
 
                       <div class="badge text-white badge-"></div>
                       
-                      <a class="d-block" href="{% url 'product-detail' product.slug %}">
+                      <a class="d-block" href="{{ product.get_url }}">
                         {% if product.product_image %}
                           <img class="img-fluid w-100" src="{{ product.product_image.url }}" alt="{{product.title}}">
                         {% else %}
