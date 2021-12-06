@@ -38,3 +38,8 @@ def detail(request, c_slug, p_slug):
         'related_products': related_products,
     }
     return render(request, 'store/detail.html', context)
+
+
+# Authentication Starts Here
+
+

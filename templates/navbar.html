@@ -30,7 +30,7 @@
               </ul>
               <ul class="navbar-nav ml-auto"> 
                 {% if request.user.is_authenticated %}           
-                  <li class="nav-item"><a class="nav-link" href="{% url 'cart' %}"> <i class="fas fa-dolly-flatbed mr-1 text-gray"></i>Cart<small class="text-gray">({{cart_items.count}})</small></a></li>
+                  <li class="nav-item"><a class="nav-link" href=""> <i class="fas fa-dolly-flatbed mr-1 text-gray"></i>Cart<small class="text-gray">({{cart_items.count}})</small></a></li>
                   <li class="nav-item"><a class="nav-link" href="#"> <i class="far fa-heart mr-1"></i><small class="text-gray"> (0)</small></a></li>
                   {% comment %} <li class="nav-item"><a class="nav-link" href="#"> <i class="fas fa-user-alt mr-1 text-gray"></i>My Account</a></li> {% endcomment %}
 
@@ -39,17 +39,17 @@
                   <div class="dropdown-menu mt-3" aria-labelledby="pagesDropdown">
                     
                       <a class="dropdown-item border-0 transition-link" href="{% url 'profile' %}">Profile</a>
-                      <a class="dropdown-item border-0 transition-link" href="{% url 'cart' %}">Cart</a>
-                      <a class="dropdown-item border-0 transition-link" href="{% url 'orders' %}">Orders</a>
-                      <a class="dropdown-item border-0 transition-link" href="{% url 'password-change' %}">Change Password</a>
+                      <a class="dropdown-item border-0 transition-link" href="">Cart</a>
+                      <a class="dropdown-item border-0 transition-link" href="">Orders</a>
+                      <a class="dropdown-item border-0 transition-link" href="">Change Password</a>
 
                     <hr>
                     <a class="dropdown-item border-0 transition-link" href="{% url 'logout' %}">Log Out</a>
                     
                 </li>
                 {% else %}
-
-
+                  <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Create Account</a></li>
                 {% endif %}   
               </ul>
             </div>
