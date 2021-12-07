@@ -1,5 +1,5 @@
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Category, Product
 
 
@@ -61,3 +61,8 @@ def detail(request, c_slug, p_slug):
         'related_products': related_products,
     }
     return render(request, 'store/detail.html', context)
+
+
+def wishlist(request, str1):
+    print("sravan", str1)
+    return redirect('')
