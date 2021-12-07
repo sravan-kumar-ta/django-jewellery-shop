@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator, EmptyPage, InvalidPage
 from django.shortcuts import render, get_object_or_404
 from .models import Category, Product
 
@@ -18,13 +19,35 @@ def all_categories(request):
     return render(request, 'store/categories.html', {'categories': categories})
 
 
+# def category_products(request, slug):
+#     category = get_object_or_404(Category, slug=slug)
+#     products = Product.objects.filter(is_active=True, category=category)
+#     categories = Category.objects.all()
+#     context = {
+#         'category': category,
+#         'products': products,
+#         'categories': categories,
+#     }
+#     return render(request, 'store/category_products.html', context)
+
 def category_products(request, slug):
     category = get_object_or_404(Category, slug=slug)
     products = Product.objects.filter(is_active=True, category=category)
     categories = Category.objects.all()
+
+    paginator = Paginator(products, 3)
+    try:
+        page = int(request.GET.get('page', '1'))
+    except:
+        page = 1
+    try:
+        products_by_page = paginator.page(page)
+    except(EmptyPage, InvalidPage):
+        products_by_page = paginator.page(paginator.num_pages)
+
     context = {
         'category': category,
-        'products': products,
+        'products': products_by_page,
         'categories': categories,
     }
     return render(request, 'store/category_products.html', context)

@@ -116,7 +116,7 @@
                 <div class="row">
 
                   {% if products %}
-                    {% for product in products %}
+                    {% for product in products.object_list %}
                     
                       <!-- PRODUCT-->
                       <div class="col-lg-4 col-sm-6">
@@ -139,7 +139,7 @@
                                 <li class="list-inline-item m-0 p-0">
                                   {% comment %} <a class="btn btn-sm btn-dark" href="{% url 'add-to-cart' %}">Add to cart</a> {% endcomment %}
 
-                                  <form action="">
+                                  <form action="{% url 'cart:add-to-cart' %}">
                                     <input type="hidden" name="prod_id" value="{{product.id}}" id="product_id">
                                     <button type="submit" class="btn btn-sm btn-dark">Add to Cart</button>
                                   </form>
@@ -159,13 +159,20 @@
 
                 </div>
                 <!-- PAGINATION-->
+
                 <nav aria-label="Page navigation example">
                   <ul class="pagination justify-content-center justify-content-lg-end">
-                    <li class="page-item"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                    {% if products.has_previous %}
+                      <li class="page-item"><a class="page-link" href="?page={{products.previous_page_number}}" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                    {% endif %}
+
+                    {% for page_number in products.paginator.page_range %}
+                      <li class="page-item {% if products.number == page_number %} active {% endif %}"><a class="page-link" href="?page={{page_number}}">{{page_number}}</a></li>
+                    {% endfor %}
+
+                    {%if products.has_next %}
+                      <li class="page-item"><a class="page-link" href="?page={{products.next_page_number}}" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                    {% endif %}
                   </ul>
                 </nav>
               </div>
