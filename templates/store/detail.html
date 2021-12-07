@@ -47,9 +47,9 @@
                 </div>
 
                 <div class="col-sm-3 pl-sm-0">
-                  {% comment %} <a class="btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0" href="{% url 'add-to-cart' %}">Add to cart</a> {% endcomment %}
+                  {% comment %} <a class="btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0" href="{% url 'cart:add-to-cart' %}">Add to cart</a> {% endcomment %}
 
-                  <form action="">
+                  <form action="{% url 'cart:add-to-cart' %}">
                     <input type="hidden" name="prod_id" value="{{product.id}}" id="product_id">
                     <button type="submit" class="btn btn-dark btn-lg btn-block h-100 d-flex align-items-center justify-content-center px-0">Add to Cart</button>
                   </form>
@@ -136,6 +136,7 @@
                       <div class="product-overlay">
                         <ul class="mb-0 list-inline">
                           <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark" href="#"><i class="far fa-heart"></i></a></li>
+                          <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" href="{{rp.get_url}}">View</a></li>
                         </ul>
                       </div>
                     </div>
